@@ -7,6 +7,7 @@ export const useMiniCheckoutForm = () => {
     resolver: zodResolver(miniCheckoutFormSchema),
     mode: 'onBlur',
     defaultValues: {
+      payment_method: 'pix',
       document: '',
       email: ''
     }
