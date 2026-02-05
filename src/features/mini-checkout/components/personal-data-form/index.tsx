@@ -6,8 +6,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/shared/components/ui/card'
-import { Field, FieldError, FieldLabel } from '@/shared/components/ui/field'
-import { Input } from '@/shared/components/ui/input'
+import { Field, FieldError } from '@/shared/components/ui/field'
 import { useMiniCheckoutFormContext } from '../../hooks/useMiniCheckoutFormContext'
 import { Controller } from 'react-hook-form'
 import { TextField } from '@/shared/components/common/text-field'
