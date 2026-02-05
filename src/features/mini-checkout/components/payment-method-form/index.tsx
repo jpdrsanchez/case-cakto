@@ -20,7 +20,7 @@ import {
 } from '@/shared/components/ui/select'
 import { calculateInstallmentAmount } from '../../utils'
 import { formatCurrency } from '@/shared/utils/formatters'
-import { useMemo } from 'react'
+import { useMemo, Activity } from 'react'
 
 interface PaymentMethodFormProps {
   productPrice: number
@@ -67,7 +67,7 @@ export const PaymentMethodForm = (props: PaymentMethodFormProps) => {
             </RadioGroup>
           )}
         />
-        {paymentMethod === 'credit_card' && (
+        <Activity mode={paymentMethod === 'credit_card' ? 'visible' : 'hidden'}>
           <Controller
             control={form.control}
             name="installment_number"
@@ -88,25 +88,21 @@ export const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                     <SelectValue placeholder="Selecionar número de parcelas" />
                   </SelectTrigger>
                   <SelectContent position="item-aligned">
-                    {installments.map(
-                      installment => (
-                        <SelectItem
-                          key={installment.installmentNumber}
-                          value={`${installment.installmentValueWithoutFee}`}
-                        >
-                          {installment.installmentNumber}x de{' '}
-                          {formatCurrency(
-                            installment.installmentValueWithoutFee
-                          )}
-                        </SelectItem>
-                      )
-                    )}
+                    {installments.map(installment => (
+                      <SelectItem
+                        key={installment.installmentNumber}
+                        value={`${installment.installmentValueWithoutFee}`}
+                      >
+                        {installment.installmentNumber}x de{' '}
+                        {formatCurrency(installment.installmentValueWithoutFee)}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </Field>
             )}
           />
-        )}
+        </Activity>
       </CardContent>
     </Card>
   )
