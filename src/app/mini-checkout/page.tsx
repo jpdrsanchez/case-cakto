@@ -1,4 +1,5 @@
-import { PaymentMethodForm } from '@/features/mini-checkout/components/payment-method-form'
+import { MiniCheckoutPaymentInfo } from '@/features/mini-checkout/components/payment-info'
+import { MiniCheckoutPaymentMethodForm } from '@/features/mini-checkout/components/payment-method-form'
 import { MiniCheckoutPersonalDataForm } from '@/features/mini-checkout/components/personal-data-form'
 import { MiniCheckoutProductInfo } from '@/features/mini-checkout/components/product-info'
 import { MiniCheckoutFormProvider } from '@/features/mini-checkout/contexts/mini-checkout-form'
@@ -13,7 +14,8 @@ export default function MiniCheckout() {
       <MiniCheckoutProductInfo product={product} />
       <MiniCheckoutFormProvider>
         <MiniCheckoutPersonalDataForm />
-        <PaymentMethodForm productPrice={product.currentPrice} />
+        <MiniCheckoutPaymentMethodForm productPrice={product.currentPrice} />
+        <MiniCheckoutPaymentInfo productPrice={product.currentPrice} />
       </MiniCheckoutFormProvider>
     </MiniCheckoutWrapperLayout>
   )

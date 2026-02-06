@@ -26,7 +26,7 @@ interface PaymentMethodFormProps {
   productPrice: number
 }
 
-export const PaymentMethodForm = (props: PaymentMethodFormProps) => {
+export const MiniCheckoutPaymentMethodForm = (props: PaymentMethodFormProps) => {
   const form = useMiniCheckoutFormContext()
   const paymentMethod = form.watch('payment_method')
 
@@ -91,7 +91,7 @@ export const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                     {installments.map(installment => (
                       <SelectItem
                         key={installment.installmentNumber}
-                        value={`${installment.installmentValueWithoutFee}`}
+                        value={`${installment.installmentNumber}`}
                       >
                         {installment.installmentNumber}x de{' '}
                         {formatCurrency(installment.installmentValueWithoutFee)}
