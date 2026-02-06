@@ -21,13 +21,17 @@ import {
 import { calculateInstallmentAmount } from '../../utils'
 import { formatCurrency } from '@/shared/utils/formatters'
 import { useMemo, Activity } from 'react'
+import { useShakeAnimation } from '@/hooks/useShakeAnimation'
 
 interface PaymentMethodFormProps {
   productPrice: number
 }
 
-export const MiniCheckoutPaymentMethodForm = (props: PaymentMethodFormProps) => {
+export const MiniCheckoutPaymentMethodForm = (
+  props: PaymentMethodFormProps
+) => {
   const form = useMiniCheckoutFormContext()
+  const shakeAnimation = useShakeAnimation()
   const paymentMethod = form.watch('payment_method')
 
   const installments = useMemo(
@@ -50,13 +54,15 @@ export const MiniCheckoutPaymentMethodForm = (props: PaymentMethodFormProps) => 
               onValueChange={field.onChange}
               name={field.name}
             >
-              <RadioButton
-                id="pix"
-                description="PIX (Taxa 0% 🔥)"
-                value="pix"
-                invalid={fieldState.invalid}
-                data-invalid={fieldState.invalid}
-              />
+              <div className={shakeAnimation.isShaking ? "animate-shake" : ""}>
+                <RadioButton
+                  id="pix"
+                  description="PIX (Taxa 0% 🔥)"
+                  value="pix"
+                  invalid={fieldState.invalid}
+                  data-invalid={fieldState.invalid}
+                />
+              </div>
               <RadioButton
                 id="credit_card"
                 description="Cartão de Crédito"
