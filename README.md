@@ -32,9 +32,20 @@ Eu realizei essa lógica de calculo com base no próprio enunciado elaborado por
 
 **Como Executar**
 
+Instalação das dependências:
+```bash
 yarn install
+```
+
+Rodar o projeto em ambiente de desenvolvimento:
+```bash
 yarn dev
+```
+
+Rodar os testes:
+```bash
 yarn test
+```
 
 **Resposta Bônus**
 
