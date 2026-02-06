@@ -100,7 +100,7 @@ export const MiniCheckoutPaymentMethodForm = (
                         value={`${installment.installmentNumber}`}
                       >
                         {installment.installmentNumber}x de{' '}
-                        {formatCurrency(installment.installmentValueWithoutFee)}
+                        {formatCurrency(installment.installmentValueWithBuyerFee)}{installment.installmentNumber > 1 ? '*' : ''}
                       </SelectItem>
                     ))}
                   </SelectContent>

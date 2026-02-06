@@ -37,7 +37,9 @@ export const calculateInstallmentAmount = (totalAmount: number) => {
     const producerFee = calculateProducerFee({ installmentNumber, totalAmount })
     const buyerFee = calculateBuyerFee({ installmentNumber, totalAmount })
 
-    const installmentValueWithBuyerFee = Decimal(buyerFee).plus(installmentValueWithoutFee).toNumber()
+    const installmentValueWithBuyerFee = Decimal(buyerFee).plus(totalAmount).dividedBy(installmentNumber).toNumber()
+
+    const totalAmountWithFee = Decimal(installmentValueWithBuyerFee).times(installmentNumber).toNumber()
 
     return {
       installmentNumber,
@@ -45,6 +47,7 @@ export const calculateInstallmentAmount = (totalAmount: number) => {
       installmentValueWithBuyerFee,
       producerFee,
       buyerFee,
+      totalAmountWithFee,
     }
   })
 }

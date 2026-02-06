@@ -42,7 +42,9 @@ export const MiniCheckoutPaymentInfo = (
       <CardContent className="grid gap-4">
         <div className="flex flex-wrap items-center justify-between">
           <span>Preço do produto</span>
-          <span>{formatCurrency(props.productPrice)}</span>
+          {paymentMethod === 'pix' && (<span>{formatCurrency(props.productPrice)}</span>)}
+          {paymentMethod === 'credit_card' && installment && (<span>{installment.installmentNumber}x de {formatCurrency(installment.installmentValueWithBuyerFee)}</span>)}
+          {paymentMethod === 'credit_card' && !installment && (<span>--</span>)}
         </div>
         <div className="flex flex-wrap items-center justify-between">
           <span>Taxa Cakto</span>
@@ -50,15 +52,22 @@ export const MiniCheckoutPaymentInfo = (
         </div>
         <div className="flex flex-wrap items-center justify-between">
           <span>Total</span>
-          <span>{formatCurrency(props.productPrice)}</span>
+          {paymentMethod === 'pix' && (<span>{formatCurrency(props.productPrice)}</span>)}
+          {paymentMethod === 'credit_card' && installment && (<span>{formatCurrency(installment.totalAmountWithFee)}</span>)}
+          {paymentMethod === 'credit_card' && !installment && (<span>--</span>)}
         </div>
         <Separator />
         <div className="flex flex-wrap items-center justify-between font-semibold text-green-700">
           <span>João Silva recebe</span>
-          <span>{formatCurrency(props.productPrice - cacktoFeeValue)}</span>
+          {paymentMethod === 'pix' && (<span>{formatCurrency(props.productPrice - cacktoFeeValue)}</span>)}
+          {paymentMethod === 'credit_card' && installment && (<span>{formatCurrency(installment.totalAmountWithFee - cacktoFeeValue)}</span>)}
+          {paymentMethod === 'credit_card' && !installment && (<span>--</span>)}
         </div>
         {paymentMethod === 'credit_card' && (
-          <p className="text-xs text-gray-600">Você economiza {formatCurrency(cacktoFeeValue)} com PIX</p>
+          <p className="text-xs text-gray-600">João Silva economiza {formatCurrency(cacktoFeeValue)} com PIX</p>
+        )}
+        {paymentMethod === 'credit_card' && installment && installment.installmentNumber > 1 && (
+          <p className="text-xs text-gray-600">Você economiza {formatCurrency(installment.totalAmountWithFee - props.productPrice)} com PIX</p>
         )}
       </CardContent>
     </Card>
